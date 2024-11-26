@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>All Profiles</h2>
+<table class="profile-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Skills</th>
+            <th>Connections</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for profile in profiles %}
+        <tr>
+            <td>{{ profile.name }}</td>
+            <td>{{ profile.title }}</td>
+            <td>{{ profile.skills | join(", ") }}</td>
+            <td>{{ profile.connections }}</td>
+            <td>
+                <a href="{{ url_for('update_profile', profile_id=profile._id) }}" class="btn btn-update">
+                    <img src="{{ url_for('static', filename='linkedin-icon.png') }}" alt="Edit Icon" class="icon"> Update
+                </a>
+                <a href="{{ url_for('delete_profile', profile_id=profile._id) }}" class="btn btn-delete">
+                    <img src="{{ url_for('static', filename='linkedin-icon.png') }}" alt="Delete Icon" class="icon"> Delete
+                </a>
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock %}
